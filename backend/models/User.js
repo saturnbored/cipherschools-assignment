@@ -34,6 +34,9 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     }],
+    interests: [{
+        type: String,
+    }],
 }, {
     timestamps: true,
 });
