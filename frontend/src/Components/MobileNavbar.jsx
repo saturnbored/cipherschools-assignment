@@ -12,7 +12,7 @@ const hoverProps = {
 const SidebarItem = ({ name, icon, flexDir, textSize, styleProps }) => {
   return (
     <>
-      <Link href="#" _hover={hoverProps} width="100%">
+      <Link href="#" _hover={hoverProps} width="100%" borderRadius={"full"}>
         <Box
           display={"flex"}
           flexDir={flexDir}
@@ -95,34 +95,38 @@ const MobileNavbar = () => {
       ),
     },
     {
-        name: "My Profile",
-        icon: () => (
-          <svg
-            width="23"
-            height="27"
-            viewBox="0 0 23 27"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="sidebar-icon"
-          >
-            <path
-              d="M11.4253 13.3295C15.2242 13.3295 18.09 10.4637 18.09 6.66475C18.09 2.86584 15.2242 0 11.4253 0C7.62638 0 4.76054 2.86584 4.76054 6.66475C4.76054 10.4637 7.62638 13.3295 11.4253 13.3295ZM13.3295 15.1347H9.52108C4.27116 15.1347 0 19.4059 0 24.6558V26.56H22.8506V24.6558C22.8506 19.4059 18.5794 15.1347 13.3295 15.1347Z"
-              fill="black"
-            ></path>
-          </svg>
-        ),
-      },
+      name: "My Profile",
+      icon: () => (
+        <svg
+          width="23"
+          height="27"
+          viewBox="0 0 23 27"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="sidebar-icon"
+        >
+          <path
+            d="M11.4253 13.3295C15.2242 13.3295 18.09 10.4637 18.09 6.66475C18.09 2.86584 15.2242 0 11.4253 0C7.62638 0 4.76054 2.86584 4.76054 6.66475C4.76054 10.4637 7.62638 13.3295 11.4253 13.3295ZM13.3295 15.1347H9.52108C4.27116 15.1347 0 19.4059 0 24.6558V26.56H22.8506V24.6558C22.8506 19.4059 18.5794 15.1347 13.3295 15.1347Z"
+            fill="black"
+          ></path>
+        </svg>
+      ),
+    },
   ];
 
   return (
     <>
-      <HStack width={"90vw"} bg="white"
-      position={"fixed"}
-      bottom = "10px"
-      zIndex={"500"}
-      shadow={"2xl"}
-      spacing={"12vw"}
-      py = "1vh"
+      <HStack
+        width={"90vw"}
+        bg="white"
+        position={"fixed"}
+        bottom="10px"
+        zIndex={"500"}
+        shadow={"2xl"}
+        spacing={"12vw"}
+        borderRadius={"full"}
+        py="1vh"
+        px="12px"
       >
         {options.map((opt, i) => (
           <SidebarItem

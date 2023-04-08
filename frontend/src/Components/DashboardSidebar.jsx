@@ -24,6 +24,8 @@ const SidebarItem = ({ name, icon, flexDir, textSize, styleProps }) => {
           flexDir={flexDir}
           alignItems={"center"}
           width="100%"
+          px = "3px"
+          pt = "3px"
           {...styleProps}
         >
           <Icon as={icon} />
@@ -38,7 +40,7 @@ const SidebarItem = ({ name, icon, flexDir, textSize, styleProps }) => {
 
 const FullSidebarContent = ({ options }) => {
   return (
-    <VStack width={"15vw"} height={"100vh"} bg={"white"}>
+    <VStack width={"15vw"} height={"100%"} bg={"white"}>
       {options.map((opt, i) => (
         <SidebarItem
           key={i}
@@ -59,7 +61,7 @@ const FullSidebarContent = ({ options }) => {
 
 const SmallSidebarContent = ({ options }) => {
   return (
-    <VStack height={"100vh"} bg="white">
+    <VStack height={"100%"} bg="white">
       {options.map((opt, i) => (
         <SidebarItem
           key={i}
@@ -184,18 +186,17 @@ const DashboardSidebar = () => {
 
   return (
     <>
-      <HStack alignItems={"left"} position={"fixed"} pt="1vh">
+      <HStack alignItems={"left"} pt="1vh" height="100%" bg={"#f2f5fa"} spacing = "0" >
         <Button
           onClick={(e) => {
             e.preventDefault();
             setShowFull(!showFull);
           }}
+          bg={"white"}
           maxWidth={"fit-content"}
           _hover={""}
-          _activeLink={""}
-          _focus={""}
-          _selected={""}
-          bg={"white"}
+          _active={""}
+          borderRadius={"0"}
         >
           {showFull ? <FiChevronRight /> : <FiChevronLeft />}
         </Button>

@@ -29,7 +29,8 @@ const Navbar = () => {
         alignItems={"center"}
         // ml={{ lg: "2vw", md: "1vw", sm: "1vw", base: "1vw" }}
         width={"100%"}
-        px = "2vw"
+        pl = "2vw"
+        pr = {{lg: "6vw", md: "4vw", sm: "2vw", base: "2vw"}}
         pt = "1vh"
         // position={"fixed"}
 

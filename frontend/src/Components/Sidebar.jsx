@@ -244,7 +244,9 @@ const Sidebar = () => {
   const [showFull, setShowFull] = useState(false);
 
   return (
-    <VStack alignItems={"left"} zIndex={"500"} position={"fixed"} pt = "1vh">
+    <VStack alignItems={"left"} zIndex={"500"} position={"fixed"} pt = "1vh"
+    bgColor={"white"}
+    >
       <Button
         onClick={(e) => {
           e.preventDefault();
@@ -252,10 +254,9 @@ const Sidebar = () => {
         }}
         maxWidth={"fit-content"}
         _hover={""}
-        _activeLink={""}
-        _focus={""}
-        _selected={""}
+        _active={""}
         bg={"white"}
+        maxW={"fit-content"}
       >
         <HiOutlineMenuAlt2 />
       </Button>
