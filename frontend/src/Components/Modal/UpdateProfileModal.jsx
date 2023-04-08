@@ -15,7 +15,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { CgProfile } from "react-icons/cg";
 
 const UpdateProfileModal = ({
   isOpen,
@@ -36,14 +35,14 @@ const UpdateProfileModal = ({
   const [firstName, setFirstName] = useState(profileDetails?.name?.firstName);
   const [lastName, setLastName] = useState(profileDetails?.name?.lastName);
   const [email, setEmail] = useState(profileDetails?.email);
-  const [profilePic, setProfilePic] = useState(profileDetails?.pic); // [profileDetails?.profilePic
+  const [profilePic, setProfilePic] = useState(profileDetails?.pic); 
   const [mobileNumber, setMobileNumber] = useState(
     profileDetails?.mobileNumber
   );
 
   const postDetails = (pics) => {
     if (pics === undefined) {
-      alert('Please select an image');
+      alert("Please select an image");
       return;
     }
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
@@ -58,14 +57,12 @@ const UpdateProfileModal = ({
         .then((res) => res.json())
         .then((data) => {
           setProfilePic(data.url.toString());
-          console.log('holaaa');
-          console.log(data.url.toString());
         })
         .catch((error) => {
           console.log(error.message);
         });
     } else {
-      alert('Wrong input type');
+      alert("Wrong input type");
       return;
     }
   };
@@ -95,23 +92,34 @@ const UpdateProfileModal = ({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size={"2xl"}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size={{ lg: "2xl", md: "2xl", sm: "sm", base: "sm" }}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Profile Update</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box display="flex" justifyContent={"space-around"}>
+            <Box
+              display="flex"
+              flexDir={{ lg: "row", md: "row", sm: "column", base: "column" }}
+              justifyContent={"space-around"}
+              alignItems={"center"}
+              gap="10px"
+            >
               <Box
                 display={"flex"}
                 flexDir={"column"}
                 justifyContent={"center"}
               >
-                <Image borderRadius= "100%" src = {profilePic} 
-                width={"150px"}
-                height={"150px"}
+                <Image
+                  borderRadius="100%"
+                  src={profilePic}
+                  width={"150px"}
+                  height={"150px"}
                 />
-                {/* <CgProfile size={"150px"} /> */}
                 <Box
                   background={"black"}
                   borderRadius={"100%"}
@@ -141,7 +149,6 @@ const UpdateProfileModal = ({
                     <FormLabel fontWeight={"semibold"}>First Name</FormLabel>
                     <Input
                       type="text"
-                      width="25vw"
                       bgColor={"#f2f5fa"}
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}

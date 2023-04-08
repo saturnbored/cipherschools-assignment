@@ -6,23 +6,12 @@ import {
   Text,
   Image,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
 } from "@chakra-ui/react";
-import { CgProfile } from "react-icons/cg";
 
 import banner from "../assets/banner.png";
 import UpdateProfileModal from "./Modal/UpdateProfileModal";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const EditProfileIcon = () => {
   return (
@@ -54,8 +43,6 @@ const Banner = ({ profileDetails, setProfileDetails }) => {
 
   const [profileImage, setProfileImage] = useState(profileDetails?.pic);
 
-  console.log(profileDetails);
-
   return (
     <>
       <Box
@@ -82,11 +69,7 @@ const Banner = ({ profileDetails, setProfileDetails }) => {
         >
           <Box display="flex" alignItems={"center"} gap="2vw">
             <Box>
-              <Image src = {profileImage}
-              width={"80px"}
-              height={"80px"}
-              />
-              {/* <CgProfile size={"80px"} /> */}
+              <Image src={profileImage} width={"80px"} height={"80px"} />
               <Box
                 background={"black"}
                 borderRadius={"100%"}
@@ -122,7 +105,14 @@ const Banner = ({ profileDetails, setProfileDetails }) => {
             </VStack>
           </Box>
           <Box>
-            <Text>0 Followers</Text>
+            <Link to="/followers">
+              <Text>
+                {profileDetails?.followerCount
+                  ? profileDetails.followerCount
+                  : 0}{" "}
+                Followers
+              </Text>
+            </Link>
           </Box>
         </HStack>
       </Box>

@@ -4,18 +4,19 @@ import {
   Card,
   CardBody,
   Hide,
+  Image,
   Show,
   Text,
 } from "@chakra-ui/react";
-import { CgProfile } from "react-icons/cg";
 import Navbar from "../Components/Navbar";
 import Sidebar from "../Components/Sidebar";
 import MobileNavbar from "../Components/MobileNavbar";
+import { useEffect, useState } from "react";
 
-const FollowerCard = ({}) => {
+const FollowerCard = ({ firstName, lastName, followersCount, pic }) => {
   return (
     <>
-      <Card maxW={"fit-content"} shadow={"2xl"}>
+      <Card maxW={"fit-content"} shadow={"xl"}>
         <CardBody
           display={"flex"}
           flexDir={"column"}
@@ -23,14 +24,19 @@ const FollowerCard = ({}) => {
           alignItems={"center"}
         >
           <Box maxW={"fit-content"}>
-            <CgProfile size={"100px"} />
+            <Image
+              src={pic}
+              borderRadius={"100%"}
+              width={"100px"}
+              height={"100px"}
+            />
           </Box>
           <Box maxW={"fit-content"} px="2px">
             <Text fontWeight={"semibold"} fontSize={"xl"}>
-              Follower's Name
+              {`${firstName} ${lastName}`}
             </Text>
             <Text>Follower's Bio</Text>
-            <Text>Follower Count</Text>
+            <Text>{followersCount} Followers</Text>
             <Button colorScheme="orange" width={"100%"}>
               Follow
             </Button>
@@ -42,58 +48,22 @@ const FollowerCard = ({}) => {
 };
 
 const Followers = () => {
-  const followers = [
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Rahul",
-      bio: "I am a software developer",
-      followerCount: 100,
-    },
-    {
-      name: "Aditya",
-      bio: "I am a software developer",
-      followerCount: 10,
-    },
-    {
-      name: "Raj",
-      bio: "I am a backend developer",
-      followerCount: 1000,
-    },
-    {
-      name: "Rohit",
-      bio: "I am a frontend developer",
-      followerCount: 10000,
-    },
-  ];
+  useEffect(() => {
+    const fetchFollowers = async () => {
+      let response = await fetch(`${import.meta.env.VITE_BASE_URL}/followers`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+        },
+      });
+      response = await response.json();
+      setFollowers(response);
+    };
+    fetchFollowers();
+  }, []);
+
+  const [followers, setFollowers] = useState([]);
 
   return (
     <>
@@ -109,7 +79,14 @@ const Followers = () => {
             </Text>
             <Box display={"flex"} flexWrap={"wrap"} gap="2vw">
               {followers.map((follower) => {
-                return <FollowerCard />;
+                return (
+                  <FollowerCard
+                    firstName={follower?.name?.firstName}
+                    lastName={follower?.name?.lastName}
+                    followersCount={follower?.followerCount}
+                    pic={follower?.pic}
+                  />
+                );
               })}
             </Box>
           </Box>
