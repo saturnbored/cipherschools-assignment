@@ -34,6 +34,10 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     }],
+    followerCount: {
+        type: Number,
+        default: 0,
+    },
     interests: [{
         type: String,
     }],

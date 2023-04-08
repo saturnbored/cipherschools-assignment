@@ -30,13 +30,7 @@ const updateDetails = asyncHandler(async (req, res) => {
     user.mobileNumber = req.body.mobileNumber || user.mobileNumber;
     user.pic = req.body.pic || user.pic;
 
-    console.log(req.body);
-
-    console.log('pic', user.pic);
-
     const updatedUser = await user.save();
-
-    console.log(updatedUser);
 
     res.status(200).json(updatedUser);
   } else {
