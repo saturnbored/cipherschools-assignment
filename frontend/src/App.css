@@ -1,0 +1,12 @@
+.nav-ntf-count {
+    align-items: center;
+    background-color: var(--brand-color);
+    border-radius: 3px;
+    color: #fff;
+    display: flex;
+    font-size: 12px;
+    justify-content: center;
+    line-height: 1;
+    margin-top: -8px;
+    padding: 3px 4px;
+  }
