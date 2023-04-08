@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Heading, Textarea, Button } from "@chakra-ui/react";
 import InterestsModal from "./Modal/InterestsModal";
 
-export default function Interests() {
+export default function Interests({ profileDetails, setProfileDetails }) {
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setIsEditing(!isEditing);
-    // Make a PUT request to the server to update the user's Interests section
+    
   };
 
-  const interestCategory = [
+  useEffect(() => {
+    profileDetails?.interests?.forEach((item) => {
+      interestCategory[
+        interestCategory.findIndex((interest) => interest.category === item)
+      ].isSelected = true;
+    });
+    setInterests(interestCategory);
+  }, [profileDetails]);
+
+  let interestCategory = [
     {
       category: "App Development",
       isSelected: false,
@@ -70,6 +79,7 @@ export default function Interests() {
           setIsEditing={setIsEditing}
           interests={interests}
           setInterests={setInterests}
+          setProfileDetails = {setProfileDetails}
         />
       )}
 
@@ -77,7 +87,16 @@ export default function Interests() {
         {interests.map((interest, index) => {
           return (
             interest.isSelected && (
-              <Box key={index} ml="1" bgColor="orange.100" textColor="orange.500" px="3" borderRadius="10" boxShadow="md" py="1">
+              <Box
+                key={index}
+                ml="1"
+                bgColor="orange.100"
+                textColor="orange.500"
+                px="3"
+                borderRadius="10"
+                boxShadow="md"
+                py="1"
+              >
                 {interest.category}
               </Box>
             )

@@ -31,3 +31,7 @@
 .react-calendar-heatmap .color-empty {
   fill: rgb(252, 252, 252);
 }
+
+#input_image{
+  display: none;
+}

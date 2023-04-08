@@ -33,7 +33,6 @@ const Navbar = () => {
         pr = {{lg: "6vw", md: "4vw", sm: "2vw", base: "2vw"}}
         pt = "1vh"
         // position={"fixed"}
-
       >
         <Box
           display={"flex"}

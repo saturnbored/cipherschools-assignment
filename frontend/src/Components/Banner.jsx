@@ -22,6 +22,7 @@ import { CgProfile } from "react-icons/cg";
 
 import banner from "../assets/banner.png";
 import UpdateProfileModal from "./Modal/UpdateProfileModal";
+import { useEffect, useState } from "react";
 
 const EditProfileIcon = () => {
   return (
@@ -44,8 +45,16 @@ const EditProfileIcon = () => {
   );
 };
 
-const Banner = () => {
+const Banner = ({ profileDetails, setProfileDetails }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    setProfileImage(profileDetails?.pic);
+  }, [profileDetails]);
+
+  const [profileImage, setProfileImage] = useState(profileDetails?.pic);
+
+  console.log(profileDetails);
 
   return (
     <>
@@ -73,8 +82,11 @@ const Banner = () => {
         >
           <Box display="flex" alignItems={"center"} gap="2vw">
             <Box>
-              {/* <Image /> */}
-              <CgProfile size={"80px"} />
+              <Image src = {profileImage}
+              width={"80px"}
+              height={"80px"}
+              />
+              {/* <CgProfile size={"80px"} /> */}
               <Box
                 background={"black"}
                 borderRadius={"100%"}
@@ -94,6 +106,8 @@ const Banner = () => {
               onOpen={onOpen}
               onClose={onClose}
               EditProfileIcon={EditProfileIcon}
+              profileDetails={profileDetails}
+              setProfileDetails={setProfileDetails}
             />
             <VStack alignItems={"left"} spacing={"-1"}>
               <Text>Hello,</Text>
@@ -102,9 +116,9 @@ const Banner = () => {
                 fontWeight={"bold"}
                 fontSize={{ lg: "2xl", md: "xl", sm: "xl", base: "xl" }}
               >
-                Shivam Ruhil
+                {`${profileDetails?.name?.firstName} ${profileDetails?.name?.lastName}`}
               </Text>
-              <Text>shivamruhilh@gmail.com</Text>
+              <Text>{`${profileDetails?.email}`}</Text>
             </VStack>
           </Box>
           <Box>

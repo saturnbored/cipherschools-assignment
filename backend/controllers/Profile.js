@@ -28,9 +28,15 @@ const updateDetails = asyncHandler(async (req, res) => {
     user.name.firstName = req.body.firstName || user.name.firstName;
     user.name.lastName = req.body.lastName || user.name.lastName;
     user.mobileNumber = req.body.mobileNumber || user.mobileNumber;
-    user.piv = req.body.pic || user.pic;
+    user.pic = req.body.pic || user.pic;
+
+    console.log(req.body);
+
+    console.log('pic', user.pic);
 
     const updatedUser = await user.save();
+
+    console.log(updatedUser);
 
     res.status(200).json(updatedUser);
   } else {
@@ -65,7 +71,7 @@ const updatePassword = asyncHandler(async (req, res) => {
   if (user && req.body.currentPassword && req.body.newPassword) {
     if (await user.matchPassword(req.body.currentPassword)) {
       user.password = req.body.newPassword;
-      await user.save();
+      const updatedUser = await user.save();
       const userToReturn = await User.findById(req.user._id, {
         password: 0,
         followers: 0,

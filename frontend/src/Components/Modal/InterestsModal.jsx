@@ -19,7 +19,7 @@ export default function InterestsModal({
   interests,
   setInterests,
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, setProfileDetails } = useDisclosure();
 
   const handleClose = () => {
     onClose();
@@ -32,6 +32,19 @@ export default function InterestsModal({
     onClose();
     setIsEditing(false);
     setInterests(tempInterests);
+    fetch(`${import.meta.env.VITE_BASE_URL}/profile/interests`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+      },
+      body: JSON.stringify({
+        interests: tempInterests
+          .filter((item) => item.isSelected)
+          .map((item) => item.category),
+      }),
+    });
   };
 
   const handleSelect = (e) => {

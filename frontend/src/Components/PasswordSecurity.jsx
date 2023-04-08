@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Box, Heading, Input, Button } from "@chakra-ui/react";
 import ChangePasswordModal from "./Modal/ChangePasswordModal";
 
-export default function PasswordSecurity() {
+export default function PasswordSecurity({
+  profileDetails,
+  setProfileDetails,
+}) {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleClick = () => {
@@ -23,16 +26,28 @@ export default function PasswordSecurity() {
           display="block"
           onClick={handleClick}
         >
-          {!isEditing ? "Edit": "Save"}
+          {!isEditing ? "Edit" : "Save"}
         </Button>
       </Box>
       <Box ml="1">
         <Heading as="h4" size="sm" textAlign="left" mb="2">
           Password
         </Heading>
-        <Input pr="4.5rem" type="password" disabled={!isEditing? true: false} value="current password"/>
+        <Input
+          pr="4.5rem"
+          type="password"
+          disabled={!isEditing ? true : false}
+          value="current password"
+        />
       </Box>
-      {isEditing && (<ChangePasswordModal isEditing={isEditing} setIsEditing={setIsEditing} />)}
+      {isEditing && (
+        <ChangePasswordModal
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          profileDetails={profileDetails}
+          setProfileDetails={setProfileDetails}
+        />
+      )}
     </Box>
   );
 }

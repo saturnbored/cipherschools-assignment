@@ -19,8 +19,29 @@ import OnTheWeb from "../Components/OnTheWeb";
 import ProfessionalInfo from "../Components/ProfessionalInfo";
 import PasswordSecurity from "../Components/PasswordSecurity";
 import Interests from "../Components/Interests";
+import { useEffect, useState } from "react";
+
+const url = import.meta.env.VITE_BASE_URL;
 
 const ProfilePage = () => {
+  const [profileDetails, setProfileDetails] = useState({});
+
+  useEffect(() => {
+    const fetchProfileDetails = async () => {
+      let fetchedProfileDetails = await fetch(`${url}/profile/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+        },
+      });
+      fetchedProfileDetails = await fetchedProfileDetails.json();
+      await setProfileDetails(fetchedProfileDetails);
+    };
+    fetchProfileDetails();
+  }, []);
+
   return (
     <Box display="flex" gap="0">
       <Hide below="lg">
@@ -41,14 +62,17 @@ const ProfilePage = () => {
           zIndex={"200"}
         >
           <Navbar />
-          <Banner />
+          <Banner
+            profileDetails={profileDetails}
+            setProfileDetails={setProfileDetails}
+          />
         </Box>
         <Box
           display="flex"
           width={"100%"}
           mt="200px"
           px={{ md: "20px", sm: "20px", base: "20px" }}
-          pb = "100px"
+          pb="100px"
         >
           {" "}
           {/* profile-page-content */}
@@ -65,8 +89,14 @@ const ProfilePage = () => {
             <CipherMap />
             <OnTheWeb />
             <ProfessionalInfo />
-            <PasswordSecurity />
-            <Interests />
+            <PasswordSecurity
+              profileDetails={profileDetails}
+              setProfileDetails={setProfileDetails}
+            />
+            <Interests
+              profileDetails={profileDetails}
+              setProfileDetails={setProfileDetails}
+            />
           </Box>
           <Box position={"fixed"} right="0" height={"100%"} bgColor={"white"}>
             <Hide below="lg">
